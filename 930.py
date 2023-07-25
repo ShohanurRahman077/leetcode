@@ -1,17 +1,17 @@
+from collections import Counter
 def numOfSubArrayWithSum(nums, goal):
-    left = curr = ans =0
-    if goal ==0:
-        return int(len(nums)*(len(nums)+1)/2)
-    for right in range(len(nums)):
-        curr +=nums[right]
-        while curr>=goal:
-            
-            curr -=nums[left]
-            left +=1
-            ans = max(ans, right -left+1)
+    P = [0]
+    for x in nums: P.append(P[-1] + x)
+    count = Counter()
+    print(P)
+    ans = 0
+    for x in P:
+        ans += count[x]
+        count[x + goal] += 1
+        print(x,goal,count)
 
     return ans
 
 
 
-print(numOfSubArrayWithSum( [1,0,1,0,1], 2))
+print(numOfSubArrayWithSum( [0,0,0,0,0],0))
